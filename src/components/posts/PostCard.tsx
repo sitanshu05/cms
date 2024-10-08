@@ -99,11 +99,10 @@ const PostCard: React.FC<IProps> = ({
 
   return (
     <div
-      className={`flex w-full cursor-pointer flex-col gap-4 p-3 transition-all duration-300 sm:p-5 ${
-        !post.content && !isAnswer
-          ? `b rounded-xl border border-gray-200 bg-white hover:-translate-y-2 dark:border-none dark:bg-neutral-900`
-          : `rounded-r-xl border-l-2 border-blue-500 bg-primary/5`
-      } ${isPending && `animate-pulse duration-700`}`}
+      className={`flex w-full cursor-pointer flex-col gap-4 p-3 transition-all duration-300 sm:p-5 ${!post.content && !isAnswer
+        ? `rounded-xl bg-neutral-50 shadow-lg hover:-translate-y-2 dark:bg-neutral-900`
+        : `rounded-r-xl border-l-2 border-blue-500 bg-primary/5`
+        } ${isPending && `animate-pulse duration-700`}`}
       onClick={() => {
         startTransition(() => {
           if (isExtendedQuestion(post)) {
@@ -132,12 +131,12 @@ const PostCard: React.FC<IProps> = ({
         </div>
         {(sessionUser?.role === ROLES.ADMIN ||
           post?.author?.id === sessionUser?.id) && (
-          <DeleteForm
-            key={post.id}
-            questionId={!isAnswer ? post.id : undefined}
-            answerId={isAnswer ? post.id : undefined}
-          />
-        )}
+            <DeleteForm
+              key={post.id}
+              questionId={!isAnswer ? post.id : undefined}
+              answerId={isAnswer ? post.id : undefined}
+            />
+          )}
       </div>
 
       {parentAuthorName && isAnswer && (
@@ -255,8 +254,7 @@ const PostCard: React.FC<IProps> = ({
                   sessionUser={sessionUser}
                   reply={false}
                   parentAuthorName={post.author.name}
-                  isAnswer={true}
-                />
+                  isAnswer={true} />
               </div>
             ))}
           </div>
