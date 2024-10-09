@@ -7,7 +7,7 @@ import CardComponent from './CardComponent';
 import { motion } from 'framer-motion';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import React from 'react';
-
+        
 export const ContentCard = ({
   title,
   onClick,
@@ -33,6 +33,39 @@ export const ContentCard = ({
   weeklyContentTitles?: string[];
 }) => {
   return (
+    <motion.div
+      onClick={onClick}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e: React.KeyboardEvent) =>
+        ['Enter', ' '].includes(e.key) && onClick()
+      }
+      className={`group relative flex h-fit w-full max-w-md cursor-pointer flex-col gap-2 rounded-2xl transition-all duration-300 hover:-translate-y-2`}
+    >
+      {markAsCompleted && (
+        <div className="absolute right-2 top-2 z-10">
+          <CheckCircle2 color="green" size={30} fill="lightgreen" />
+        </div>
+      )}
+      {type === 'video' && (
+        <div className="absolute bottom-12 right-2 z-10 rounded-md p-2 font-semibold text-white">
+          <Play className="size-6" />
+        </div>
+      )}
+      {type !== 'video' && (
+        <div className="relative overflow-hidden rounded-md">
+          <CardComponent
+            title={title}
+            contentDuration={contentDuration && formatTime(contentDuration)}
+            type={type}
+          />
+          {!!videoProgressPercent && (
+            <div className="absolute bottom-0 h-1 w-full bg-[#707071]">
+              <div
+                className="h-full bg-[#FF0101]"
+                style={{ width: `${videoProgressPercent}%` }}
+              />
+
     <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -95,6 +128,7 @@ export const ContentCard = ({
                   side="top"
                 />
               )}
+
             </div>
           </motion.div>
         </TooltipTrigger>
