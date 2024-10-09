@@ -104,6 +104,7 @@ const PostCard: React.FC<IProps> = ({
           ? `b rounded-xl border border-gray-200 bg-white hover:-translate-y-2 dark:border-none dark:bg-neutral-900`
           : `rounded-r-xl border-l-2 border-blue-500 bg-primary/5`
       } ${isPending && `animate-pulse duration-700`}`}
+
       onClick={() => {
         startTransition(() => {
           if (isExtendedQuestion(post)) {
@@ -255,8 +256,8 @@ const PostCard: React.FC<IProps> = ({
                   sessionUser={sessionUser}
                   reply={false}
                   parentAuthorName={post.author.name}
-                  isAnswer={true}
-                />
+                  isAnswer={true} />
+
               </div>
             ))}
           </div>

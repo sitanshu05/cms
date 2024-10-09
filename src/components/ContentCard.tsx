@@ -5,7 +5,9 @@ import { formatTime } from '@/lib/utils';
 import VideoThumbnail from './videothumbnail';
 import CardComponent from './CardComponent';
 import { motion } from 'framer-motion';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import React from 'react';
+        
 export const ContentCard = ({
   title,
   onClick,
@@ -15,6 +17,7 @@ export const ContentCard = ({
   bookmark,
   contentId,
   contentDuration,
+  weeklyContentTitles,
 }: {
   type: 'folder' | 'video' | 'notion';
   contentId?: number;
@@ -27,12 +30,9 @@ export const ContentCard = ({
   bookmark?: Bookmark | null;
   contentDuration?: number;
   uploadDate?: string;
+  weeklyContentTitles?: string[];
 }) => {
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b9dc044 (tag fixed)
     <motion.div
       onClick={onClick}
       tabIndex={0}
@@ -65,8 +65,7 @@ export const ContentCard = ({
                 className="h-full bg-[#FF0101]"
                 style={{ width: `${videoProgressPercent}%` }}
               />
-<<<<<<< HEAD
-=======
+
     <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -129,39 +128,16 @@ export const ContentCard = ({
                   side="top"
                 />
               )}
->>>>>>> a58690c (show content titles on hover of weekly cards (#1429))
-=======
->>>>>>> b9dc044 (tag fixed)
+
             </div>
-          )}
-        </div>
-      )}
-      {type === 'video' && (
-        <div className="relative overflow-hidden">
-          <VideoThumbnail
-            title={title}
-            contentId={contentId ?? 0}
-            imageUrl=""
-            // imageUrl={
-            //   'https://d2szwvl7yo497w.cloudfront.net/courseThumbnails/video.png'
-            // }
-          />
-        </div>
-      )}
-      <div className="flex items-center justify-between gap-4">
-        <h3 className="w-full truncate text-xl font-bold capitalize tracking-tighter md:text-2xl">
-          {title}
-        </h3>
-        {bookmark !== undefined && contentId && (
-          <BookmarkButton
-            bookmark={bookmark}
-            contentId={contentId}
-            size={24}
-            align="end"
-            side="top"
-          />
-        )}
-      </div>
-    </motion.div>
+          </motion.div>
+        </TooltipTrigger>
+        {
+          Array.isArray(weeklyContentTitles) && weeklyContentTitles?.length > 0 && <TooltipContent sideOffset={16}>
+            {weeklyContentTitles?.map((title) => <p>{title}</p>)}
+          </TooltipContent>
+        }
+      </Tooltip>
+    </TooltipProvider>
   );
 };
