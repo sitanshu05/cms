@@ -1,8 +1,5 @@
 'use client';
-<<<<<<< HEAD
-=======
 
->>>>>>> b9dc044 (tag fixed)
 import { cn } from '@/lib/utils';
 import React, { forwardRef, Ref } from 'react';
 
@@ -22,10 +19,6 @@ const Tag = forwardRef(
       'hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50',
       className,
       'text-s font-medium me-2 px-3 py-0.5 rounded-xl dark:bg-blue-900 dark:text-blue-300 bg-blue-100 text-blue-800',
-<<<<<<< HEAD
-
-=======
->>>>>>> b9dc044 (tag fixed)
     );
 
     return (
@@ -33,11 +26,8 @@ const Tag = forwardRef(
         ref={ref}
         className={tagClassName}
         {...props}
-<<<<<<< HEAD
         role="status"
         aria-label={`Tag: ${name}`}
-=======
->>>>>>> b9dc044 (tag fixed)
       >
         {name}
       </span>
